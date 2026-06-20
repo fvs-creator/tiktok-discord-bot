@@ -3,6 +3,8 @@ services:
     name: tiktok-discord-bot
     env: python
     plan: free
-    buildCommand: pip install -r requirements.txt
+    buildCommand: |
+      pip install --upgrade pip
+      pip install -r requirements.txt
     startCommand: python discord_bot.py
     
