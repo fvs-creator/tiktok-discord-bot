@@ -1,11 +1,13 @@
 import os
 import discord
 from discord.ext import commands
-from tiktok_shadowban_checker import TikTokShadowBanClient
 import urllib3
 urllib3.disable_warnings()
 
-# Load tokens from environment variables (Render will set these)
+# Import from GitHub package
+from tiktok_shadowban_checker import TikTokShadowBanClient
+
+# Load tokens from environment variables
 DISCORD_TOKEN = os.environ.get("DISCORD_TOKEN")
 APIFY_TOKEN = os.environ.get("APIFY_TOKEN")
 
@@ -21,13 +23,11 @@ intents = discord.Intents.default()
 intents.message_content = True
 bot = commands.Bot(command_prefix="!", intents=intents)
 
-# ============================================
-#  BOT EVENTS & COMMANDS
-# ============================================
 @bot.event
 async def on_ready():
     print(f"✅ Bot connected as {bot.user}")
     print(f"📊 Bot ID: {bot.user.id}")
+    print("=" * 50)
 
 @bot.command(name="help")
 async def help_command(ctx):
@@ -197,9 +197,6 @@ async def batch_videos(ctx, *urls):
     except Exception as e:
         await ctx.send(f"❌ **Batch Error:** {str(e)[:150]}")
 
-# ============================================
-#  RUN THE BOT
-# ============================================
 if __name__ == "__main__":
     print("=" * 50)
     print("🤖 TIKTOK SHADOW BAN CHECKER - DISCORD BOT")
